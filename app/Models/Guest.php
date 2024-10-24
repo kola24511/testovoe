@@ -9,10 +9,16 @@ class Guest extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'phone_code'];
+    protected $fillable = [
+        'first_name',
+        'last_name',
+        'email',
+        'phone',
+        'country_id',
+    ];
 
-    public function guest()
+    public function country()
     {
-        return $this->hasMany(Guest::class);
+        return $this->belongsTo(Country::class);
     }
 }

@@ -10,16 +10,10 @@ class Country extends Model
 {
     use HasFactory, Notifiable;
 
-    protected $fillable = [
-        'first_name',
-        'last_name',
-        'email',
-        'phone',
-        'country_id',
-    ];
+    protected $fillable = ['name', 'phone_code'];
 
-    public function country()
+    public function guest()
     {
-        return $this->belongsTo(Country::class);
+        return $this->hasMany(Guest::class);
     }
 }
