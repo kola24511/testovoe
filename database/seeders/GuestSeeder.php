@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Guest;
 use Illuminate\Database\Seeder;
 
 class GuestSeeder extends Seeder
@@ -12,6 +12,7 @@ class GuestSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Guest::factory(50)
+            ->create();
     }
 }
