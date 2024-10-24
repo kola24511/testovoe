@@ -1,0 +1,38 @@
+services:
+    app:
+        container_name: web
+        build:
+            context: .
+            dockerfile: .docker/app/Dockerfile
+        entrypoint: php artisan octane:frankenphp --max-requests=1
+        ports:
+            - "8000:8000"
+        volumes:
+            - .:/web
+        depends_on:
+            - mysql
+        networks:
+            - test
+    mysql:
+        container_name: maria-container
+        image: mariadb
+        restart: unless-stopped
+        tty: true
+        ports:
+            - "3306:3306"
+        volumes:
+            - mysql-data:/var/lib/mysql
+        environment:
+            MYSQL_DATABASE: testovoe
+            MYSQL_USER: testovoe
+            MYSQL_PASSWORD: secret
+            MYSQL_ROOT_PASSWORD: secret
+            SERVICE_TAGS: dev
+            SERVICE_NAME: mysql
+        networks:
+            - test
+volumes:
+    mysql-data:
+networks:
+    test:
+        driver: bridge
